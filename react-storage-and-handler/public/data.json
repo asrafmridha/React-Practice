@@ -1,0 +1,44 @@
+[
+    {
+      "id": "65d384e6f021ee856a8bc95a",
+      "price": 34,
+      "name": "Rosa Price",
+      "gender": "male"
+    },
+    {
+      "id": "65d384e632c40f6c62e9cb5e",
+      "price": 30,
+      "name": "Lara Craig",
+      "gender": "female"
+    },
+    {
+      "id": "65d384e6ce2780d127cd8801",
+      "price": 28,
+      "name": "Vera Delaney",
+      "gender": "female"
+    },
+    {
+      "id": "65d384e6b3b4359d8a67fd17",
+      "price": 30,
+      "name": "Snider Dean",
+      "gender": "male"
+    },
+    {
+      "id": "65d384e631edf174ef76de5c",
+      "price": 36,
+      "name": "Oconnor Shields",
+      "gender": "male"
+    },
+    {
+      "id": "65d384e6aa1645af596b09fc",
+      "price": 39,
+      "name": "Brandi Bush",
+      "gender": "female"
+    },
+    {
+      "id": "65d384e66a7baddd85ee444f",
+      "price": 27,
+      "name": "Lola Ball",
+      "gender": "female"
+    }
+  ]
