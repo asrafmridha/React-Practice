@@ -1,9 +1,12 @@
 import React from 'react';
 import './Cosmetic.css'
+import saveDataLocalStorage from '../../utilities/fakeDb';
 
 const Cosmetic = (props) => {
     const { name, price, id } = props.cosmetic;
     const addCart = (id) => {
+        // localStorage.setItem(id,1);
+        saveDataLocalStorage(id);
         console.log('Added To Cart', id);
     }
 
