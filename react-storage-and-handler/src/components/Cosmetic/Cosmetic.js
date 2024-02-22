@@ -1,6 +1,6 @@
 import React from 'react';
 import './Cosmetic.css'
-import saveDataLocalStorage from '../../utilities/fakeDb';
+import {saveDataLocalStorage,removeFromLocalStorage} from '../../utilities/fakeDb';
 
 const Cosmetic = (props) => {
     const { name, price, id } = props.cosmetic;
@@ -14,6 +14,8 @@ const Cosmetic = (props) => {
         console.log('Purchase For Product Id', id);
     }
 
+    const removeFromCart=(id)=> removeFromLocalStorage(id);
+
     const addToCartWithParam = () => addCart(id);
 
     return (
@@ -24,6 +26,7 @@ const Cosmetic = (props) => {
             <button onClick={() => addCart(id)}>Add To Cart :shortCut</button> <br />
             <button onClick={addToCartWithParam}>Add To Cart</button> <br />
             <button onClick={() => purchase(id)}>Purchase</button>
+            <button onClick={() => removeFromCart(id)}>Remove</button>
         </div>
     );
 };

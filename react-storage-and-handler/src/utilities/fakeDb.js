@@ -32,4 +32,16 @@ const saveDataLocalStorage =(id)=>{
     
 }
 
-export default saveDataLocalStorage;
+const removeFromLocalStorage=(id)=>{
+    const storeCart =localStorage.getItem('shopping-cart');
+    if(storeCart){
+        const shoppingCart =JSON.parse(storeCart);
+        if(id in shoppingCart){
+            delete shoppingCart[id];
+            localStorage.setItem('shopping-cart',JSON.stringify(shoppingCart));
+        }
+        
+    } 
+}
+
+export  {saveDataLocalStorage,removeFromLocalStorage};
