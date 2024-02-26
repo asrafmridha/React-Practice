@@ -1,9 +1,26 @@
 .product{
+    margin-top: 10px;
     width: 300px;
     height: 510px;
+    border: 1px solid red;
+    border-radius: 8px;
+    padding: 7px;
+    position: relative;
 }
 
 .product img{
     height: 286px;
     width: 286px;
+    border-radius: 8px;
+    margin: 17px;
+}
+
+.btn-cart{
+    width: 100%;
+    background: green;
+    position: absolute;
+    bottom: 0;
+}
+.btn-cart:hover{
+    background: orange;
 }
