@@ -20,6 +20,7 @@
     background: green;
     position: absolute;
     bottom: 0;
+    display: flex;
 }
 .btn-cart:hover{
     background: orange;
