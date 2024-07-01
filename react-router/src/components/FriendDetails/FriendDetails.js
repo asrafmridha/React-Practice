@@ -3,10 +3,11 @@ import { useLoaderData } from 'react-router-dom';
 
 const FriendDetails = () => {
     const friendDetail = useLoaderData();
-    console.log(friendDetail);
+    const {name,phone} =friendDetail;
     return (
         <div>
-            <h3>Friend Everything You need To Know</h3>
+            <h1>Details About : {name}</h1>
+            <p>Call Him/Her :{phone}</p>
         </div>
     );
 };
