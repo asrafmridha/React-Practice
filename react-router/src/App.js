@@ -7,6 +7,8 @@ import Main from './layouts/Main';
 import Products from './components/Products/Products';
 import Friends from './components/Friends/Friends';
 import FriendDetails from './components/FriendDetails/FriendDetails';
+import Post from './components/Posts/Posts';
+import PostDetails from './components/PostDetails/PostDetails';
 
 function App() {
   const router = createBrowserRouter([
@@ -16,23 +18,37 @@ function App() {
         { path: '/home', element: <Home></Home> },
         { path: '/about', element: <About></About> },
         { path: '/products', element: <Products></Products> },
-        { path: '/friends',
-           element: <Friends></Friends>,
-           loader: async ({ params }) => {
+        {
+          path: '/friends',
+          element: <Friends></Friends>,
+          loader: async ({ params }) => {
             return fetch(`https://jsonplaceholder.typicode.com/users`);
           },
-           },
-           {
-            path: 'friend/:friendID',
-            element: <FriendDetails></FriendDetails>,
-            loader: async ({ params }) => {
-              return fetch(`https://jsonplaceholder.typicode.com/users/${params.friendID}`);
-            },
-    
-           }
+        },
+        {
+          path: 'friend/:friendID',
+          element: <FriendDetails></FriendDetails>,
+          loader: async ({ params }) => {
+            return fetch(`https://jsonplaceholder.typicode.com/users/${params.friendID}`);
+          },
+        },
+        {
+          path: 'posts',
+          loader: async () => {
+            return fetch(`https://jsonplaceholder.typicode.com/posts`);
+          },
+          element: <Post></Post>
+        },
+        {
+          path: '/post/:useId',
+          element: <PostDetails></PostDetails>,
+          loader: async ({ params }) => {
+            return fetch(`https://jsonplaceholder.typicode.com/posts/${params.useId}`)
+          }
+        }
       ]
     },
-    {path:'*',element: <div>404 Not Found!</div>}
+    { path: '*', element: <div>404 Not Found!</div> }
 
   ]);
   return (
