@@ -9,6 +9,7 @@ import Friends from './components/Friends/Friends';
 import FriendDetails from './components/FriendDetails/FriendDetails';
 import Post from './components/Posts/Posts';
 import PostDetails from './components/PostDetails/PostDetails';
+import Countries from './components/Countries/Countries';
 
 function App() {
   const router = createBrowserRouter([
@@ -45,7 +46,13 @@ function App() {
           loader: async ({ params }) => {
             return fetch(`https://jsonplaceholder.typicode.com/posts/${params.useId}`)
           }
-        }
+        },{
+          path: '/countries',
+          loader: async () => {
+            return fetch(`https://restcountries.com/v3.1/all`);
+          },
+          element: <Countries></Countries>
+        },
       ]
     },
     { path: '*', element: <div>404 Not Found!</div> }

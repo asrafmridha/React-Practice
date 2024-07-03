@@ -1,0 +1,16 @@
+import React from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
+
+const Countries = () => {
+    const countries = useLoaderData();
+    return (
+        <div>
+            <h3>All Countries : {countries.length}</h3>
+            {
+                countries.map(country=><li key={country.cca3}><Link>{country.name.common}</Link></li>)
+            }
+        </div>
+    );
+};
+
+export default Countries;
