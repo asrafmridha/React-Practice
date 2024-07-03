@@ -10,6 +10,7 @@ import FriendDetails from './components/FriendDetails/FriendDetails';
 import Post from './components/Posts/Posts';
 import PostDetails from './components/PostDetails/PostDetails';
 import Countries from './components/Countries/Countries';
+import Country from './components/Country/Country';
 
 function App() {
   const router = createBrowserRouter([
@@ -52,6 +53,13 @@ function App() {
             return fetch(`https://restcountries.com/v3.1/all`);
           },
           element: <Countries></Countries>
+        },
+        {
+          path: '/country/:countryId',
+          element: <Country></Country>,
+          loader: async ({ params }) => {
+            return fetch(`https://restcountries.com/v3.1/name/${params.countryId}`)
+          }
         },
       ]
     },
