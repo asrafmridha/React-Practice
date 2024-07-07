@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from './Main';
 import Order from './components/Order/Order';
 import Home from './components/Home/Home';
+import Grandpa from './components/Grandpa/Grandpa';
 
 function App() {
   const router = createBrowserRouter([
@@ -19,6 +20,10 @@ function App() {
         {
           path: "/order",
           element: <Order></Order>
+        },
+        {
+          path: "/grandpa",
+          element: <Grandpa></Grandpa>
         }
 
       ]
