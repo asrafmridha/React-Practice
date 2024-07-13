@@ -5,6 +5,8 @@ import Main from './Main';
 import Order from './components/Order/Order';
 import Home from './components/Home/Home';
 import Grandpa from './components/Grandpa/Grandpa';
+import ExpressApiLoad from './components/ExpressApiLoad/ExpressApiLoad';
+import UserDataExpressApi from './components/UserDataWithApi/UserDataExpressApi';
 
 function App() {
   const router = createBrowserRouter([
@@ -24,6 +26,18 @@ function App() {
         {
           path: "/grandpa",
           element: <Grandpa></Grandpa>
+        },
+        {
+          path: "/expressApi",
+          loader : async ()=>fetch('http://localhost:5002/users'),
+          element: <ExpressApiLoad></ExpressApiLoad>
+        },
+        {
+          path: "/user/:userId",
+          loader: ({ params }) => {
+            return async ()=>fetch(`http://localhost:5002/user/${params.userId}`);
+          },
+          element: <UserDataExpressApi></UserDataExpressApi>
         }
 
       ]

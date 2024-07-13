@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
+const cors= require('cors');
 const port = 5002;
+
+app.use(cors());
 
 const users =require('./users.json')
 
 app.get('/', (req, res) => {
-    res.send('Hello World From Node!')
+    res.send('Hello World From Node !')
 });
 
 app.get('/users', (req, res) => {
