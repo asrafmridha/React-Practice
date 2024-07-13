@@ -7,7 +7,8 @@ const UserDataExpressApi = () => {
     return (
         <div>
             <h4>User Data Details</h4>
-            <p>{user.name}</p>
+            <p>Name :{user.name}</p>
+            <p>Email :{user.email}</p>
         </div>
     );
 };

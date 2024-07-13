@@ -16,7 +16,7 @@ function App() {
       children: [
         {
           path: "/home",
-          loader : async ()=>fetch('tshirts.json'),
+          loader: async () => fetch('tshirts.json'),
           element: <Home></Home>
         },
         {
@@ -29,17 +29,16 @@ function App() {
         },
         {
           path: "/expressApi",
-          loader : async ()=>fetch('http://localhost:5002/users'),
+          loader: async () => fetch('http://localhost:5002/users'),
           element: <ExpressApiLoad></ExpressApiLoad>
         },
         {
-          path: "/user/:userId",
-          loader: ({ params }) => {
-            return async ()=>fetch(`http://localhost:5002/user/${params.userId}`);
+          path: "/user/:id",
+          loader: async ({ params }) => {
+            return await fetch(`http://localhost:5002/user/${params.id}`);
           },
           element: <UserDataExpressApi></UserDataExpressApi>
-        }
-
+        },
       ]
     },
   ]);
