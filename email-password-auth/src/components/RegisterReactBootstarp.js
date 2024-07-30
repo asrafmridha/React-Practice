@@ -7,6 +7,7 @@ const auth = getAuth();
 
 const RegisterReactBootstarp = () => {
     const [passwordError, setPasswordError] = useState('');
+    const [success, setSuccess] = useState(false);
     const handleRegister = (event) => {
         event.preventDefault();
         let target = event.target;
@@ -30,9 +31,11 @@ const RegisterReactBootstarp = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user)
+                console.log(user);
+                setSuccess(true);
             }).catch(error => {
                 console.error('error', error);
+                setPasswordError(error.message);
             })
 
 
@@ -52,6 +55,7 @@ const RegisterReactBootstarp = () => {
                     <Form.Control type="password" name='password' placeholder="Password" required />
                 </Form.Group>
                 <p className='text text-danger'>{passwordError}</p>
+                {success && <p className='text-success'>User Created Successfully</p>}
 
                 <Button variant="primary" type="submit">
                     Register
