@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Link } from 'react-router-dom';
 
 const auth = getAuth();
 
@@ -33,6 +34,7 @@ const RegisterReactBootstarp = () => {
                 const user = result.user;
                 console.log(user);
                 setSuccess(true);
+                target.reset();
             }).catch(error => {
                 console.error('error', error);
                 setPasswordError(error.message);
@@ -61,6 +63,7 @@ const RegisterReactBootstarp = () => {
                     Register
                 </Button>
             </Form>
+            <p><small>Already Account? Please <Link to='/login'>Login</Link></small></p>
         </div>
     );
 };
