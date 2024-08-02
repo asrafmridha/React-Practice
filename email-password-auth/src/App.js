@@ -5,6 +5,7 @@ import RegisterReactBootstarp from './components/RegisterReactBootstarp';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from './layout/Main';
 import LoginBootstarp from './components/LoginBootstarp';
+import ResetPasswordPage from './components/ResetPasswordPage';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <LoginBootstarp></LoginBootstarp>
+
+      } ,  
+      {
+        path: '/resetPasswordPage',
+        element: <ResetPasswordPage></ResetPasswordPage>
 
       }
     ]

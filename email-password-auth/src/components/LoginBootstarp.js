@@ -42,6 +42,7 @@ const LoginBootstarp = () => {
                 </Button>
             </Form>
             <p><small>New to this website? Please <Link to='/register'>Register</Link></small></p>
+            <p><small>Forget Password? <Link to='/resetPasswordPage'>Reset Password</Link></small></p>
         </div>
 
     );
