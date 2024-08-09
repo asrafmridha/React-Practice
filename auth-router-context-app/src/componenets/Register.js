@@ -1,9 +1,7 @@
 import React from 'react';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import app from '../firebase/firebase.init';
 import { Link } from 'react-router-dom';
 
-const auth = getAuth(app);
+
 
 const handleLogin = (event) => {
     event.preventDefault();
@@ -12,13 +10,6 @@ const handleLogin = (event) => {
     const email = target.email.value;
     const password = target.password.value;
     console.log(email,password);
-    signInWithEmailAndPassword(auth,email,password)
-    .then(result=>{
-        const user=result.user;
-        console.log(user);
-    }).catch(error=>{
-        console.error('error',error);
-    });
 }
 
 const Register = () => {
