@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-
-
-
-const handleLogin = (event) => {
-    event.preventDefault();
-    let target = event.target;
-    const name = target.name.value;
-    const email = target.email.value;
-    const password = target.password.value;
-    console.log(email,password);
-}
+import UserContext, { AuthContext } from './contexts/UserContext';
 
 const Register = () => {
+    const { createUser } = useContext(AuthContext);
+    const handleLogin = (event) => {
+        event.preventDefault();
+        let target = event.target;
+        const name = target.name.value;
+        const email = target.email.value;
+        const password = target.password.value;
+        console.log(email, password);
+        createUser(email,password)
+        .then(result=>{
+            const user=result.user;
+            console.log('registered User',user);
+        }).catch(error=>{
+            console.error(error);
+        })
+    }
     return (
         <div>
             <div className="hero bg-base-200 min-h-screen">
@@ -27,7 +33,7 @@ const Register = () => {
                                     <span className="label-text">Email</span>
                                 </label>
                                 <input name='name' type="text" placeholder="Name" className="input input-bordered" required />
-                            </div>       
+                            </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
@@ -40,7 +46,7 @@ const Register = () => {
                                 </label>
                                 <input name='password' type="password" placeholder="password" className="input input-bordered" required />
                                 <label className="label">
-                                <Link to='/login' className="btn btn-active btn-link">Alredy Have an Account?</Link>
+                                    <Link to='/login' className="btn btn-active btn-link">Alredy Have an Account?</Link>
                                 </label>
                             </div>
                             <div className="form-control mt-6">
