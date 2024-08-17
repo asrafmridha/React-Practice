@@ -12,6 +12,7 @@ const Header = () => {
                 <Link className="btn btn-ghost text-xl"  to='/home'>Home</Link>
                 <Link className="btn btn-ghost text-xl" to='/login'>Login</Link>
                 <Link className="btn btn-ghost text-xl" to='/Register'>Register</Link>
+                {user?.email && <span>Welcome, {user.email}</span> }
             </div>
             
         </div>
