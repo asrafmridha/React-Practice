@@ -26,8 +26,8 @@ function App() {
     <>
       <h1>Simple Crud</h1>
       <form onSubmit={handleAddUser}>
-        <input type="email" name="name" id="" /> <br />
-        <input type="text" name="email" id="" /> <br />
+        <input type="email" name="email" id="" /> <br />
+        <input type="text" name="name" id="" /> <br />
         <input type="submit" value="ADD USER" />
       </form>
     </>
