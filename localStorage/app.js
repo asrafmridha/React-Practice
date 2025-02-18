@@ -20,4 +20,23 @@ const addProductToCart=(productName,productQuantity)=>{
 
     //object to String
     localStorage.setItem('cart', JSON.stringify(cart));
+    displayItem();
 }
+const clearAllFromLocalStorage=()=>{
+    localStorage.clear();
+    displayItem();
+}
+
+const displayItem=()=>{
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || {};
+    const productContainer=document.getElementById('productContainer');
+    productContainer.innerHTML = '';
+
+    for(const [key, value] of Object.entries(cartItems)){
+        const li=document.createElement('li');
+        li.innerHTML=`${key} : ${value}`;
+        productContainer.appendChild(li);  
+    }
+}
+
+displayItem();
