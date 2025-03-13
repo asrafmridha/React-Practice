@@ -8,6 +8,7 @@ import Root from "./components/Root/Root.jsx";
 import ErrorPage from "./components/ErrorPage/ErrorPage.jsx";
 import Home from "./components/Home/Home.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
+import BookDetails from "./components/BookDetails/BookDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,9 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <Dashboard></Dashboard>,
+      },{
+        path: "bookDetails/:bookId",
+        element: <BookDetails></BookDetails>,
       },
     ],
   },
