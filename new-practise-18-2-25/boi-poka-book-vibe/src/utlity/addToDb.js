@@ -19,4 +19,25 @@ const addToStoreReadList = (id) => {
     }
 };
 
-export { addToStoreReadList };
+const getStoreWishList = () => {
+    const wishListStr = localStorage.getItem('wish-list');
+    try {
+        const parsedData = wishListStr ? JSON.parse(wishListStr) : [];
+        return Array.isArray(parsedData) ? parsedData : []; 
+    } catch (error) {
+        console.error("Error parsing wishList from localStorage:", error);
+        return [];
+    }
+};
+
+const addToStoreWishList = (id) => {
+    const storedList = getStoreWishList();
+    if (Array.isArray(storedList) && storedList.includes(id)) {
+        alert("Already WishList");
+    } else {
+        storedList.push(id);
+        localStorage.setItem('wish-list', JSON.stringify(storedList));
+    }
+};
+
+export { addToStoreReadList,addToStoreWishList };
