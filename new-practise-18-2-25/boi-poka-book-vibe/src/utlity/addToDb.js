@@ -40,4 +40,4 @@ const addToStoreWishList = (id) => {
     }
 };
 
-export { addToStoreReadList,addToStoreWishList,getStoreReadList };
+export { addToStoreReadList,addToStoreWishList,getStoreReadList,getStoreWishList };
