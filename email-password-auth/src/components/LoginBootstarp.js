@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import app from '../firebase/firebase.init';
+import { FaRegEye } from 'react-icons/fa';
+import { IoMdEyeOff } from 'react-icons/io';
 
 const auth = getAuth(app);
 
@@ -13,16 +15,19 @@ const LoginBootstarp = () => {
         let target = event.target;
         const email = target.email.value;
         const password = target.password.value;
-        console.log(email,password);
-        signInWithEmailAndPassword(auth,email,password)
-        .then(result=>{
-            const user=result.user;
-            console.log(user);
-        }).catch(error=>{
-            console.error('error',error);
-        })
+        console.log(email, password);
+        signInWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            }).catch(error => {
+                console.error('error', error);
+            })
 
     }
+
+    const [showPassword, setshowPassword] = useState(false);
+    const [checkbox, setcheckbox] = useState(false);
     return (
         <div className='w-50 mx-auto'>
             <h3 className='text-primary'>Please Login !!!</h3>
@@ -34,10 +39,17 @@ const LoginBootstarp = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name='password' placeholder="Password" required />
+                    <Form.Control type={showPassword ? 'text' : 'password'} name='password' placeholder="Password" required /> <button onClick={() => setshowPassword(!showPassword)} className='btn btn' type='button'>{showPassword ? <IoMdEyeOff /> : <FaRegEye />}   </button>
+
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name='checkbox' value="" id="flexCheckDefault" onClick={()=>setcheckbox(!checkbox)} />
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Accept Terms And Condition
+                    </label>
+                </div>
+                <Button variant="primary" type="submit" disabled={!checkbox} >
                     Login
                 </Button>
             </Form>
