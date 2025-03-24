@@ -8,6 +8,7 @@ import Home from "./components/Home/Home.jsx";
 import ErrorPage from "./components/ErrorPage/ErrorPage.jsx";
 import SignUp from "./components/SignUp/SignUp.jsx";
 import Login from "./components/Login/Login.jsx";
+import AuthProvider from "./providers/AuthProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,19 +21,21 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path : "signUp",
-        element : <SignUp></SignUp>
+        path: "signUp",
+        element: <SignUp></SignUp>,
       },
       {
-        path : "login",
-        element : <Login></Login>
-      }
+        path: "login",
+        element: <Login></Login>,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <AuthProvider>
       <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
   </StrictMode>
 );
