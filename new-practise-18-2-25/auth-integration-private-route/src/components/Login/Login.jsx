@@ -1,27 +1,45 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Login = () => {
+  const { signInWithUser } = useContext(AuthContext);
+  const handleLogin = (event) => {
+    event.preventDefault();
+    let target = event.target;
+    const email = target.email.value;
+    const password = target.password.value;
+    signInWithUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        target.reset();
+      })
+      .catch((error) => {
+        console.error("error", error);
+      });
+  };
+
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             alt="Your Company"
             src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-            className="mx-auto h-10 w-auto"
+            className="w-auto h-10 mx-auto"
           />
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-           Log in to your account
+          <h2 className="mt-10 font-bold tracking-tight text-center text-gray-900 text-2xl/9">
+            Log in to your account
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={handleLogin}>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm/6 font-medium text-gray-900"
+                className="block font-medium text-gray-900 text-sm/6"
               >
                 Email address
               </label>
@@ -41,7 +59,7 @@ const Login = () => {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm/6 font-medium text-gray-900"
+                  className="block font-medium text-gray-900 text-sm/6"
                 >
                   Password
                 </label>
@@ -76,7 +94,7 @@ const Login = () => {
             </div>
           </form>
 
-          <p className="mt-5 text-center text-sm/6 text-gray-500">
+          <p className="mt-5 text-center text-gray-500 text-sm/6">
             Not an account?{" "}
             <NavLink
               to="/signUp"
