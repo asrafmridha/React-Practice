@@ -1,11 +1,19 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
-
-    const authInfo=useContext(AuthContext);
-    console.log(authInfo.name);
+  const { user, signOutUser } = useContext(AuthContext);
+  console.log(user);
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        console.log("Sign Out Successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const links = (
     <>
       <li>
@@ -41,18 +49,26 @@ const Navbar = () => {
             tabIndex={0}
             className="p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box z-1 w-52"
           >
-         {links}
+            {links}
           </ul>
         </div>
         <a className="text-xl btn btn-ghost">Auth</a>
       </div>
       <div className="hidden navbar-center lg:flex">
-        <ul className="px-1 menu menu-horizontal">
-        {links}
-        </ul>
+        <ul className="px-1 menu menu-horizontal">{links}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">{ authInfo.name ? authInfo.name : ''}</a>
+        {/* <a className="btn">{ user?.email }</a> */}
+        {user ? (
+          <>
+            <span>{user?.email}</span>
+            <a onClick={handleSignOut} className="btn">
+              Sign Out
+            </a>
+          </>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </div>
     </div>
   );
