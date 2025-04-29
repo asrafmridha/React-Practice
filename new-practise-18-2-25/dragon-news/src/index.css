@@ -3,3 +3,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
 @tailwind utilities;
+
+a.active{
+    background-color: #E7E7E7;
+}
