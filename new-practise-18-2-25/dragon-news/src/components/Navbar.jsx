@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import user from "../assets/user.png"
 const Navbar = () => {
+
     return (
         <div className="flex items-center justify-between">
             <div></div>
