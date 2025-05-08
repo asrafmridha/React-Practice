@@ -3,11 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
-  const { signInWithUser,setUser,loading } = useContext(AuthContext);
-  console.log(loading);
-  if(loading){
-     return <span className="loading loading-ring loading-xl m-70 p-24"></span>;
-  }
+  const { signInWithUser,setUser } = useContext(AuthContext);
   const handleLogin=(event)=>{
     event.preventDefault();
     let target = event.target;

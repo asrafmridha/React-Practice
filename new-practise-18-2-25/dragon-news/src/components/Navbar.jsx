@@ -12,7 +12,7 @@ const Navbar = () => {
     <div className="flex items-center justify-between">
       <div></div>
       <div className="space-x-4">
-        <Link>Home</Link>
+        <Link to="/">Home</Link>
         <Link>About</Link>
         <Link>Carrer</Link>
       </div>
