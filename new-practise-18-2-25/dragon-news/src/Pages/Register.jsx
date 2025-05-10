@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const Register = () => {
-  const { createUser,setUser } = useContext(AuthContext);
+  const { createUser, setUser } = useContext(AuthContext);
+  const [error, setError] = useState({});
   const handleRegister = (event) => {
     event.preventDefault();
     let target = event.target;
     const name = target.name.value;
+    if (name.length < 5) {
+      setError({ ...error, name: "Name Must Be Greater than  5 Character" });
+      return;
+    }
     const email = target.email.value;
     const photoUrl = target.photoUrl.value;
     const password = target.password.value;
@@ -31,6 +36,7 @@ const Register = () => {
           <div className="card-body">
             <fieldset className="fieldset">
               <label className="label">Name</label>
+              {error?.name && <label className="label text-red-600 font-bold text-xs"  >{error.name}</label>}
               <input
                 type="text"
                 name="name"
