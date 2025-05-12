@@ -8,7 +8,7 @@ const Login = () => {
   const navigate=useNavigate()
 
   const location =useLocation();
-  console.log(location);
+
   const handleLogin=(event)=>{
     event.preventDefault();
     let target = event.target;
@@ -17,7 +17,6 @@ const Login = () => {
     signInWithUser(email,password)
     .then((result) => {
       const user = result.user;
-        console.log(user);
         setUser(user);
         target.reset();
         navigate(location?.state ? location.state : "/");
