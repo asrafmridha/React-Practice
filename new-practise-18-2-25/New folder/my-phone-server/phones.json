@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "iPhone 14 Pro",
+    "brand": "Apple",
+    "price": 1099,
+    "storage": "128GB",
+    "ram": "6GB",
+    "features": ["Face ID", "OLED Display", "Triple Camera"],
+    "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-family"
+  },
+  {
+    "id": 2,
+    "name": "Samsung Galaxy S23 Ultra",
+    "brand": "Samsung",
+    "price": 1199,
+    "storage": "256GB",
+    "ram": "12GB",
+    "features": ["S Pen", "200MP Camera", "AMOLED Display"],
+    "image": "https://images.samsung.com/is/image/samsung/p6pim/in/sm-s918bzkhins/gallery/in-galaxy-s23-ultra-s918-446317-sm-s918bzkhins-534915736"
+  },
+  {
+    "id": 3,
+    "name": "Google Pixel 8",
+    "brand": "Google",
+    "price": 799,
+    "storage": "128GB",
+    "ram": "8GB",
+    "features": ["Tensor G3", "Magic Eraser", "Clean Android"],
+    "image": "https://store.google.com/product/images/google_pixel_8_google_store"
+  },
+  {
+    "id": 4,
+    "name": "OnePlus 11",
+    "brand": "OnePlus",
+    "price": 699,
+    "storage": "128GB",
+    "ram": "8GB",
+    "features": ["Fast Charging", "Hasselblad Camera", "120Hz Display"],
+    "image": "https://image01.oneplus.net/ebp/202301/05/1-m00-3b-62-cpgm7gloy2oav0qkaakv2ltqjpw013_840_840.png"
+  },
+  {
+    "id": 5,
+    "name": "Xiaomi 13 Pro",
+    "brand": "Xiaomi",
+    "price": 899,
+    "storage": "256GB",
+    "ram": "12GB",
+    "features": ["Leica Lens", "120W Charging", "Snapdragon 8 Gen 2"],
+    "image": "https://i01.appmifile.com/webfile/globalimg/products/pc/xiaomi-13-pro/specs01.png"
+  },
+  {
+    "id": 6,
+    "name": "Motorola Edge 40 Pro",
+    "brand": "Motorola",
+    "price": 749,
+    "storage": "256GB",
+    "ram": "12GB",
+    "features": ["Curved Display", "68W Charging", "Dolby Atmos"],
+    "image": "https://motorolauk.vtexassets.com/arquivos/ids/158556/motorola-edge-40-pro-fnt.png"
+  },
+  {
+    "id": 7,
+    "name": "Asus ROG Phone 7",
+    "brand": "Asus",
+    "price": 999,
+    "storage": "512GB",
+    "ram": "16GB",
+    "features": ["Gaming Trigger", "6000mAh Battery", "144Hz Display"],
+    "image": "https://dlcdnwebimgs.asus.com/gain/2dc840f6-0d32-4602-90c5-c3e58e8e223e/"
+  },
+  {
+    "id": 8,
+    "name": "Realme GT 5 Pro",
+    "brand": "Realme",
+    "price": 649,
+    "storage": "256GB",
+    "ram": "12GB",
+    "features": ["Snapdragon 8 Gen 2", "240W Charging", "Sony IMX890 Sensor"],
+    "image": "https://fdn2.gsmarena.com/vv/pics/realme/realme-gt5-pro-1.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Sony Xperia 1 V",
+    "brand": "Sony",
+    "price": 1199,
+    "storage": "256GB",
+    "ram": "12GB",
+    "features": ["4K OLED Display", "Pro Camera App", "Cinematic Video"],
+    "image": "https://www.sony.com/image/d0f1dc47b7fca01f3dded7efce474678?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF"
+  },
+  {
+    "id": 10,
+    "name": "Nothing Phone (2)",
+    "brand": "Nothing",
+    "price": 599,
+    "storage": "128GB",
+    "ram": "8GB",
+    "features": ["Glyph Interface", "Clean Android", "Snapdragon 8+ Gen 1"],
+    "image": "https://cdn.shopify.com/s/files/1/0661/9630/7113/files/phone-2-product-image.jpg"
+  }
+]
