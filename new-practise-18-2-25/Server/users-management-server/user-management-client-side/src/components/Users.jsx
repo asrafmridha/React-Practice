@@ -16,15 +16,19 @@ const Users = () => {
     const name = form.name.value;
     const email = form.email.value;
     const user = { name, email };
-    console.log(user);
-    form.reset();
     fetch(`http://localhost:5000/users`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify(user),
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        form.reset();
+        const newUsers=[...users,data];
+        setUsers(newUsers);
+      });
   };
   return (
     <div>
