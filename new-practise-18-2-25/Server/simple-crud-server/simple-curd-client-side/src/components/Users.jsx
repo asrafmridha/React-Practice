@@ -1,11 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useLoaderData } from "react-router";
+import { Navigate, useLoaderData, useNavigate } from "react-router";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const usersData = useLoaderData();
+  const navigate=useNavigate();
   useEffect(() => {
     setUsers(usersData);
   }, []);
@@ -67,7 +68,10 @@ const Users = () => {
       <p>All Users ({users.length})</p>
       {users.map((user) => (
         <p key={user._id}>
-          {user.name} - {user.email}{" "}
+          {user.name} - {user.email}
+                <button onClick={()=>navigate(`/edit/${user?._id}`)} className="btn ">
+            Edit
+          </button>
           <button onClick={() => handleDelete(user._id)} className="btn ">
             Delete
           </button>

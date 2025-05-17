@@ -27,13 +27,6 @@ async function run() {
     await client.connect();
     const database = client.db("usersDB")
     const userCollection = database.collection("users");
-    app.post('/users', async (req, res) => {
-      const user = req.body;
-      console.log('new User', user);
-      const result = await userCollection.insertOne(user);
-      res.send(result);
-      console.log(result);
-    })
     app.get('/users', async (req, res) => {
       try {
         const users = await userCollection.find().toArray();
@@ -41,6 +34,41 @@ async function run() {
       } catch (err) {
         console.error(err);
         res.status(500).send({ error: 'Failed to fetch users' });
+      }
+    });
+    app.post('/users', async (req, res) => {
+      const user = req.body;
+      console.log('new User', user);
+      const result = await userCollection.insertOne(user);
+      res.send(result);
+      console.log(result);
+    })
+    app.put('/users/:id', async (req, res) => {
+      const id = req.params.id;
+      const updatedUser = req.body;
+      const filter = { _id: new ObjectId(id) };
+      const updateDoc = {
+        $set: {
+          name: updatedUser.name,
+          email: updatedUser.email,
+        },
+      };
+      try {
+        const result = await userCollection.updateOne(filter, updateDoc);
+        res.send(result);
+      } catch (err) {
+        console.error('Update failed:', err);
+        res.status(500).send({ error: 'Failed to update user' });
+      }
+    })
+    app.get('/users/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      try {
+        const result = await userCollection.findOne(query);
+        res.send(result);
+      } catch (err) {
+        res.status(500).send({ error: 'Failed to Fetch user' });
       }
     });
     app.delete('/users/:id', async (req, res) => {
