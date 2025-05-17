@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require("cors");
 const app = express()
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const port = process.env.port || 5000;
 app.use(cors());
 app.use(express());
@@ -30,10 +30,30 @@ async function run() {
     app.post('/users', async (req, res) => {
       const user = req.body;
       console.log('new User', user);
-      const result=await userCollection.insertOne(user);
+      const result = await userCollection.insertOne(user);
       res.send(result);
       console.log(result);
     })
+    app.get('/users', async (req, res) => {
+      try {
+        const users = await userCollection.find().toArray();
+        res.send(users);
+      } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: 'Failed to fetch users' });
+      }
+    });
+    app.delete('/users/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      try {
+        const result = await userCollection.deleteOne(query);
+        res.send(result);
+      } catch (error) {
+        res.status(500).send({ error: 'Failed to delete user' });
+      }
+
+    });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
@@ -43,9 +63,11 @@ async function run() {
   }
 }
 run().catch(console.dir);
+
 app.get('/', (req, res) => {
   res.send('Simple Curd Is Running')
 })
+
 
 
 

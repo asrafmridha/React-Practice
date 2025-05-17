@@ -4,10 +4,15 @@ import { useState } from "react";
 import { useLoaderData } from "react-router";
 
 const Users = () => {
+  const [users, setUsers] = useState([]);
+  const usersData = useLoaderData();
+  useEffect(() => {
+    setUsers(usersData);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let form = e.target;
-    console.log(form);
     const name = form.name.value;
     const email = form.email.value;
     const user = { name, email };
@@ -22,6 +27,27 @@ const Users = () => {
       .then((response) => response.json())
       .then((data) => {
         form.reset();
+        fetch(`http://localhost:5000/users`)
+          .then((res) => res.json())
+          .then((newUsers) => setUsers(newUsers));
+      });
+  };
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
+    if (!confirmDelete) return;
+
+    fetch(`http://localhost:5000/users/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          fetch(`http://localhost:5000/users`)
+            .then((res) => res.json())
+            .then((newUsers) => setUsers(newUsers));
+        }
       });
   };
   return (
@@ -29,7 +55,7 @@ const Users = () => {
       <p>Simple Crud System</p>
       <h3>Add Users</h3>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="">Name: </label>  
+        <label htmlFor="">Name: </label>
         <input type="text" name="name" id="" />
         <br /> <br />
         <label htmlFor="">Email: </label>
@@ -38,6 +64,15 @@ const Users = () => {
         <input type="submit" value="Submit" />
       </form>
 
+      <p>All Users ({users.length})</p>
+      {users.map((user) => (
+        <p key={user._id}>
+          {user.name} - {user.email}{" "}
+          <button onClick={() => handleDelete(user._id)} className="btn ">
+            Delete
+          </button>
+        </p>
+      ))}
     </div>
   );
 };
