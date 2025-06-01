@@ -8,7 +8,6 @@ const port = process.env.PORT || 5000;
 // middleware
 app.use(cors());
 app.use(express());
-console.log(process.env.S3_BUCKET) 
 
 const userName=process.env.USER_NAME;
 const secretKey=process.env.SECRET_KEY;
@@ -33,7 +32,7 @@ async function run() {
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    // await client.close();
   }
 }
 run().catch(console.dir);
