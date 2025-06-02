@@ -1,18 +1,42 @@
 import React from "react";
+import Swal from "sweetalert2";
 
 const AddCoffee = () => {
   const handleAddCoffee = (event) => {
     event.preventDefault();
-    const form=event.target;
-    const name=form.name.value;
-    const quantity=form.quantity.value;
-    const supplierName=form.supplier_name.value;
-    const taste=form.taste.value;
-    const category=form.category.value;
-    const photo_url=form.photo_url.value;
-    const details=form.details.value;
-    console.log(name,quantity,supplierName,taste,category,photo_url,details);
- 
+    const form = event.target;
+    const name = form.name.value;
+    const quantity = form.quantity.value;
+    const supplierName = form.supplier_name.value;
+    const taste = form.taste.value;
+    const category = form.category.value;
+    const photo_url = form.photo_url.value;
+    const details = form.details.value;
+    const newCoffee = {
+      name,
+      quantity,
+      supplierName,
+      taste,
+      category,
+      photo_url,
+      details,
+    };
+    fetch(`http://localhost:5000/addCoffee`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newCoffee),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        form.reset();
+        Swal.fire({
+          title: "Good job!",
+          text: "Coffee Created SuccessFully",
+          icon: "success",
+        });
+      });
   };
   return (
     <div className="max-w-3xl mx-auto  p-6 bg-white rounded-2xl shadow-lg">
@@ -66,7 +90,7 @@ const AddCoffee = () => {
           </label>
           <input
             type="text"
-                   name="supplier_name"
+            name="supplier_name"
             id="supplier_name"
             placeholder="Enter Supplier Name"
             className="mt-1 w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
@@ -97,7 +121,7 @@ const AddCoffee = () => {
             Category
           </label>
           <input
-          name="category"
+            name="category"
             type="text"
             id="category"
             placeholder="Category"
@@ -113,7 +137,7 @@ const AddCoffee = () => {
             Details
           </label>
           <input
-          name="details"
+            name="details"
             type="text"
             id="details"
             placeholder="Details"
@@ -129,7 +153,7 @@ const AddCoffee = () => {
             Photo Url
           </label>
           <input
-          name="photo_url"
+            name="photo_url"
             type="text"
             id="photo_url"
             placeholder="Photo Url"
