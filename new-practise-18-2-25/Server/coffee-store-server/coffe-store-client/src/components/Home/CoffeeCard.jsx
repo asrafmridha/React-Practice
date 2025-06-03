@@ -1,9 +1,18 @@
 import React from "react";
+import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee }) => {
-  console.log(coffee);
-  const { name, quantity, supplierName, taste, category, photo_url, details } =
-    coffee;
+const CoffeeCard = ({ coffee,handleDelete }) => {
+  const {
+    _id,
+    name,
+    quantity,
+    supplierName,
+    taste,
+    category,
+    photo_url,
+    details,
+  } = coffee;
+ 
   return (
     <div className="card card-side bg-base-100 shadow-sm my-1">
       <figure>
@@ -20,7 +29,12 @@ const CoffeeCard = ({ coffee }) => {
           <div className="join join-vertical space-y-2">
             <button className="btn join-item">View</button>
             <button className="btn join-item bg-primary">Edit</button>
-            <button className="btn join-item bg-red-600">X</button>
+            <button
+              className="btn join-item bg-red-600"
+              onClick={() => handleDelete(_id)}
+            >
+              X
+            </button>
           </div>
         </div>
       </div>
