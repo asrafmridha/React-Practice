@@ -2,14 +2,35 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import CoffeeCard from "./CoffeeCard";
 import Swal from "sweetalert2";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const Home = () => {
-  const coffees = useLoaderData();
-  const [coffeeList, setCoffeeList] = useState([]);
+  // const coffees = useLoaderData();
+  // const [coffeeList, setCoffeeList] = useState([]);
 
-  useEffect(() => {
-    setCoffeeList(coffees);
-  }, [coffees]);
+  // useEffect(() => {
+  //   setCoffeeList(coffees);
+  // }, [coffees]);
+
+  const getCoffees = async () => {
+    const res = await fetch(`http://localhost:5000/coffee`);
+    if (!res.ok) {
+      throw new Error("Failed to fetch coffee data");
+    }
+    return res.json();
+  };
+  const queryClient = useQueryClient();
+  const {
+    data: coffeeList,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: getCoffees,
+  });
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error: {error.message}</p>;
 
   const handleDelete = (id) => {
     Swal.fire({

@@ -16,7 +16,14 @@ const router = createBrowserRouter([
   },  {
     path: "updateCoffee",
     element: <UpdateCoffee></UpdateCoffee>,
-  },
+  },{
+    path: "/edit/:id",
+    loader: async ({ params  }) => {
+      const id = params.id;
+      return fetch(`http://localhost:5000/coffee/${id}`);
+    },
+    element: <UpdateCoffee></UpdateCoffee>,
+  }
 ]);
 
 export default router;
