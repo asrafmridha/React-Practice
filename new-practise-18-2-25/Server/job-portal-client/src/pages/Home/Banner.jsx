@@ -1,15 +1,25 @@
 import React from "react";
 import { easeOut, motion } from "motion/react";
+import programmingTeam from "../../assets/programming-team.jpg";
+import celebrate from "../../assets/office-celebrate.jpg";
 
 const Banner = () => {
   return (
     <div className="hero bg-base-200 min-h-96">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="flex-1">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-            className="max-w-sm rounded-lg shadow-2xl"
+          <motion.img
+          animate={{y: [15,50,15]}}
+          transition={{repeat:Infinity, duration :10 }}
+            src={programmingTeam}
+            className="max-w-sm rounded-t-[40px] rounded-br-4xl border-l-4 shadow-2xl border-b-4 border-blue-400"
+          />        <motion.img
+          animate={{x: [200,250,200]}}
+          transition={{repeat:Infinity, duration :10 }}
+            src={celebrate}
+            className="max-w-sm rounded-t-[40px] rounded-br-4xl border-l-4 shadow-2xl border-b-4 border-blue-400"
           />
+     
         </div>
         <div className="flex-1">
           <motion.h1
@@ -22,7 +32,17 @@ const Banner = () => {
             }}
             className="text-5xl font-bold"
           >
-            Latest Job For You
+            Latest{" "}
+            <motion.span
+              animate={{ color: ["#b7dd0c", "#6a714b", "#dc2266"] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+              }}
+            >
+              Job
+            </motion.span>{" "}
+            For You
           </motion.h1>
 
           <p className="py-6">
