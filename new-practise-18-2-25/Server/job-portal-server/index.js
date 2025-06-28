@@ -26,6 +26,16 @@ async function run() {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
         // Send a ping to confirm a successful connection
+        const jobCollection = client.db("jobPortal").collection('jobs');
+        app.get('/jobs', async (req, res) => {
+            try {
+                const jobs = await jobCollection.find().toArray();
+                res.send(jobs);
+            } catch (err) {
+                console.error(err);
+                res.status(500).send({ error: 'Failed to fetch users' });
+            }
+        });
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } catch (err) {
