@@ -36,6 +36,17 @@ async function run() {
                 res.status(500).send({ error: 'Failed to fetch users' });
             }
         });
+
+        app.get('/jobs/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            try {
+                const result = await jobCollection.findOne(query);
+                res.send(result);
+            } catch (err) {
+                res.status(500).send({ error: 'Failed to Fetch user' });
+            }
+        });
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } catch (err) {

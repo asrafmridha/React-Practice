@@ -1,5 +1,6 @@
 import React from "react";
 import { SiGooglemaps } from "react-icons/si";
+import { Link } from "react-router";
 
 const JobCard = ({ job }) => {
   console.log(job);
@@ -49,7 +50,9 @@ const JobCard = ({ job }) => {
 
         <div className="card-actions justify-end">
           <p>$ {salaryRange.max} - {salaryRange.min}</p>
+          <Link to={`/jobs/${_id}`}>
           <button className="btn btn-primary mt-4">Apply Now</button>
+          </Link>
         </div>
       </div>
     </div>
