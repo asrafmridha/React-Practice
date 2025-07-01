@@ -3,10 +3,14 @@ import registerLottieData from "../../assets/lottie/registerAnimation.json";
 import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import SocialLogin from "../shared/SocialLogin";
+import { useLocation, useNavigate } from "react-router";
 
 const SignIn = () => {
   const { signInWithUser, setUser } = useContext(AuthContext);
   const [error, setError] = useState({});
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const navigate=useNavigate();
   const handleSignIn = (e) => {
     e.preventDefault();
     let target = e.target;
@@ -18,8 +22,8 @@ const SignIn = () => {
            target.reset();
                 console.log(result);
         setUser(user);
-     
-        // navigate(location?.state ? location.state : "/");
+      navigate(from, { replace: true });
+
       })
       .catch((err) => {
         setError({ ...error, login: err.code });
