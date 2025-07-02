@@ -9,7 +9,7 @@ const SignIn = () => {
   const { signInWithUser, setUser } = useContext(AuthContext);
   const [error, setError] = useState({});
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from=location.state || '/';
   const navigate=useNavigate();
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -18,11 +18,8 @@ const SignIn = () => {
     const password = target.password.value;
     signInWithUser(email, password)
       .then((result) => {
-        const user = result.user;
-           target.reset();
-                console.log(result);
-        setUser(user);
-      navigate(from, { replace: true });
+        // const user = result.user;
+      navigate(from);
 
       })
       .catch((err) => {
