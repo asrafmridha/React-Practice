@@ -27,6 +27,7 @@ async function run() {
         await client.connect();
         // Send a ping to confirm a successful connection
         const jobCollection = client.db("jobPortal").collection('jobs');
+        const jobApplicationCollection = client.db("jobPortal").collection('job_application');
         app.get('/jobs', async (req, res) => {
             try {
                 const jobs = await jobCollection.find().toArray();
@@ -36,6 +37,14 @@ async function run() {
                 res.status(500).send({ error: 'Failed to fetch users' });
             }
         });
+
+        app.post('/jobs', async (req, res) => {
+            const jobIApplyInfo = req.body;
+            console.log('Job Application', jobIApplyInfo);
+            const result = await jobApplicationCollection.insertOne(jobIApplyInfo);
+            res.send(result);
+            console.log(result);
+        })
 
         app.get('/jobs/:id', async (req, res) => {
             const id = req.params.id;

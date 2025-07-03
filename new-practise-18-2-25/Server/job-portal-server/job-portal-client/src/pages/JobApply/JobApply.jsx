@@ -1,17 +1,38 @@
 import React from "react";
 import { useParams } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 const JobApply = () => {
-    const {id}=useParams();
-    const handleJobApplicationSubmit=(e)=>{
-        e.preventDefault();
-        const form=e.target;
-        const linkedin_url=form.linkedin_url.value;
-        const github_url=form.github_url.value;
-        const resume_url=form.resume_url.value;
-        console.log(linkedin_url,github_url,resume_url);
-
-    }
+  const { id } = useParams();
+  const { user } = useAuth();
+  console.log(user);
+  const handleJobApplicationSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const linkedin_url = form.linkedin_url.value;
+    const github_url = form.github_url.value;
+    const resume_url = form.resume_url.value;
+    console.log(linkedin_url, github_url, resume_url);
+    const jobAppyInfo = {
+      job_id: id,
+      applicant_email: user.email,
+      linkedin_url,
+      github_url,
+      resume_url,
+    };
+    console.log(jobAppyInfo);
+    fetch(`http://localhost:5000/jobs`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(jobAppyInfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        form.reset();
+      });
+  };
   return (
     <div className="hero bg-base-200 min-h-16">
       <div className="hero-content flex-col w-full max-w-xl">
@@ -30,10 +51,11 @@ const JobApply = () => {
                     <span className="label-text">LinkedIn URL</span>
                   </label>
                   <input
-                  name="linkedin_url"
+                    name="linkedin_url"
                     type="url"
                     placeholder="https://linkedin.com/in/yourprofile"
-                    className="input input-bordered w-full" required
+                    className="input input-bordered w-full"
+                    required
                   />
                 </div>
 
@@ -42,10 +64,11 @@ const JobApply = () => {
                     <span className="label-text">GitHub URL</span>
                   </label>
                   <input
-                  name="github_url"
+                    name="github_url"
                     type="url"
                     placeholder="https://github.com/yourprofile"
-                    className="input input-bordered w-full" required
+                    className="input input-bordered w-full"
+                    required
                   />
                 </div>
 
@@ -54,10 +77,11 @@ const JobApply = () => {
                     <span className="label-text">Resume URL</span>
                   </label>
                   <input
-                  name="resume_url"
+                    name="resume_url"
                     type="url"
                     placeholder="Link to your resume (Google Drive, Dropbox, etc.)"
-                    className="input input-bordered w-full" required
+                    className="input input-bordered w-full"
+                    required
                   />
                 </div>
 
