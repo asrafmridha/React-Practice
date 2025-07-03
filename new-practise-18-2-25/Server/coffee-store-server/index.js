@@ -45,7 +45,30 @@ async function run() {
       const result = await coffeeCollection.insertOne(coffee);
       res.send(result);
       console.log(result);
-    })
+    });
+    app.get('/coffee/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      try {
+        const result = await coffeeCollection.findOne(query);
+        res.send(result);
+      } catch (err) {
+        res.status(500).send({ error: 'Failed to Fetch user' });
+      }
+    });
+    app.put('/coffee/:id', async (req, res) => {
+      const id = req.params.id;
+      const updateCoffee = req.body;
+      const filter = { _id: new ObjectId(id) };
+      try {
+        const result = await coffeeCollection.updateOne(filter, { $set: updateCoffee });
+        console.log("Update result:", result);
+        res.send(result);
+      } catch (err) {
+        console.error('Update failed:', err);
+        res.status(500).send({ error: 'Failed to update coffee' });
+      }
+    });
     app.delete('/coffee/:id', async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
