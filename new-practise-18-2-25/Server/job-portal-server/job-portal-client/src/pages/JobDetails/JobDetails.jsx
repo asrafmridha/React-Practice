@@ -1,8 +1,20 @@
 import React from "react";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 
 const jobDetails = () => {
-  const {title,company,salaryRange,location,jobType,category,description,company_logo,hr_email,hr_name} = useLoaderData();
+  const {
+    _id,
+    title,
+    company,
+    salaryRange,
+    location,
+    jobType,
+    category,
+    description,
+    company_logo,
+    hr_email,
+    hr_name,
+  } = useLoaderData();
   return (
     <div className="max-w-5xl mx-auto my-10 px-6 py-8 bg-white shadow-md rounded-lg">
       <div className="flex flex-col md:flex-row items-start gap-6">
@@ -52,9 +64,11 @@ const jobDetails = () => {
 
       {/* Apply Button */}
       <div className="mt-8">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded shadow">
-          Apply Now
-        </button>
+        <Link to={`/jobApply/${_id}`}>
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded shadow">
+            Apply Now
+          </button>
+        </Link>
       </div>
     </div>
   );
