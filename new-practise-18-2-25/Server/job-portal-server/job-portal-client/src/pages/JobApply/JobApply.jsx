@@ -1,11 +1,12 @@
 import React from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import Swal from 'sweetalert2';
 
 const JobApply = () => {
   const { id } = useParams();
   const { user } = useAuth();
+  const navigate =useNavigate();
   console.log(user);
   const handleJobApplicationSubmit = (e) => {
     e.preventDefault();
@@ -38,6 +39,8 @@ const JobApply = () => {
           timer: 1500,
         });
         form.reset();
+        navigate('/myJobApplication')
+        
       });
   };
   return (

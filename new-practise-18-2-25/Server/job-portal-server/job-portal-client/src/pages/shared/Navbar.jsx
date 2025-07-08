@@ -19,7 +19,7 @@ const Navbar = () => {
       <li>
         <Link to="/">Home</Link>
       </li>
-      <li>
+      {/* <li>
         <details>
           <summary>Parent</summary>
           <ul className="p-2">
@@ -31,9 +31,9 @@ const Navbar = () => {
             </li>
           </ul>
         </details>
-      </li>
+      </li> */}
       <li>
-        <a>Home</a>
+        <Link to="/myJobApplication"><button>My Job Applications</button></Link>
       </li>
     </>
   );

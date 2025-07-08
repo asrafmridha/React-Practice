@@ -45,6 +45,34 @@ async function run() {
             res.send(result);
             console.log(result);
         })
+        app.get('/job-application', async (req, res) => {
+            const email = req.query.email;
+            const query = { applicant_email: email };
+
+            try {
+                const result = await jobApplicationCollection.find(query).toArray();
+                //  res.send(result);
+                for (application of result) {
+                    const id = application.job_id?.toString();
+                    console.log(id);
+                    if (!id) continue;
+                    const query1 = { _id: new ObjectId(id) };
+                    const job = await jobCollection.findOne(query1);
+
+                    if (job) {
+                        application.title = job.title;
+                        application.company = job.company;
+                    }
+                }
+                res.send(result);
+            } catch (err) {
+                console.error(err);
+                res.status(500).send({ error: 'Failed to fetch job applications' });
+            }
+        });
+
+
+
 
         app.get('/jobs/:id', async (req, res) => {
             const id = req.params.id;
