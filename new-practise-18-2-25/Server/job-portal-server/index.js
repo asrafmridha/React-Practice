@@ -43,7 +43,6 @@ async function run() {
             console.log('Job Application', jobIApplyInfo);
             const result = await jobApplicationCollection.insertOne(jobIApplyInfo);
             res.send(result);
-            console.log(result);
         })
         app.get('/job-application', async (req, res) => {
             const email = req.query.email;
@@ -58,10 +57,11 @@ async function run() {
                     if (!id) continue;
                     const query1 = { _id: new ObjectId(id) };
                     const job = await jobCollection.findOne(query1);
-
                     if (job) {
                         application.title = job.title;
+                        application.location = job.location;
                         application.company = job.company;
+                        application.company_logo = job.company_logo;
                     }
                 }
                 res.send(result);
