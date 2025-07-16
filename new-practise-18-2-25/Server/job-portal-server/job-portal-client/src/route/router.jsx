@@ -26,18 +26,41 @@ const router = createBrowserRouter([
           const id = params.id;
           return fetch(`http://localhost:5000/jobs/${id}`);
         },
-        element : <PrivateRoute><JobDetails></JobDetails></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <JobDetails></JobDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/jobApply/:id",
-        element: <PrivateRoute><JobApply></JobApply></PrivateRoute>,
-      },   {
+        element: (
+          <PrivateRoute>
+            <JobApply></JobApply>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/myJobApplication",
-        element: <PrivateRoute><MyApplication></MyApplication></PrivateRoute>,
-      },  {
+        element: (
+          <PrivateRoute>
+            <MyApplication></MyApplication>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/JobApplicationDetails/:id",
-        element: <PrivateRoute><MyApplicationDetails></MyApplicationDetails></PrivateRoute>,
-      }, {
+        loader: async ({ params }) => {
+          const id = params.id;
+          return fetch(`http://localhost:5000/jobs/${id}`);
+        },
+        element: (
+          <PrivateRoute>
+            <MyApplicationDetails></MyApplicationDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/register",
         element: <Register></Register>,
       },

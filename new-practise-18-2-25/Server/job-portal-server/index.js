@@ -10,7 +10,7 @@ app.use(express.json());
 
 const userName = process.env.USER_NAME;
 const secretKey = process.env.SECRET_KEY;
-console.log(userName, secretKey);
+
 
 const uri = `mongodb+srv://${userName}:${secretKey}@cluster0.7oymi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 const client = new MongoClient(uri, {
@@ -79,10 +79,23 @@ async function run() {
             const query = { _id: new ObjectId(id) };
             try {
                 const result = await jobCollection.findOne(query);
+                console.log(result);
                 res.send(result);
             } catch (err) {
                 res.status(500).send({ error: 'Failed to Fetch user' });
             }
+        });
+
+        app.delete('/job-application/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            try {
+                const result = await jobApplicationCollection.deleteOne(query);
+                res.send(result);
+            } catch (error) {
+                res.status(500).send({ error: 'Failed to delete Job Application Collection' });
+            }
+
         });
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
