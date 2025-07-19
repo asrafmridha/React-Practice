@@ -6,7 +6,11 @@ const AddJob = () => {
 
   const handleAddJob = (e) => {
     e.preventDefault();
-   
+    const formData = new FormData(e.target);
+    const initialData = Object.fromEntries(formData);
+    const { min, max, currency, ...newJob } = initialData;
+    newJob.salaryRange={min,max,currency};
+    console.log(newJob);
   };
 
   return (
@@ -90,13 +94,14 @@ const AddJob = () => {
                 name="currency"
                 className="select select-bordered w-full"
                 required
+                defaultValue=""
               >
-                <option disabled selected>
+                <option value="" disabled>
                   Currency
                 </option>
-                <option>BDT</option>
-                <option>USD</option>
-                <option>INR</option>
+                <option value="BDT">BDT</option>
+                <option value="USD">USD</option>
+                <option value="INR">INR</option>
               </select>
             </div>
             <div className="form-control">
