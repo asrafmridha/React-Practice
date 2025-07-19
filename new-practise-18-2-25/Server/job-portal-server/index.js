@@ -37,7 +37,12 @@ async function run() {
                 res.status(500).send({ error: 'Failed to fetch users' });
             }
         });
-
+        app.post('/addJobs', async (req, res) => {
+            const job = req.body;
+            console.log('new Job', job);
+            const result = await jobCollection.insertOne(job);
+            res.send(result);
+        });
         app.post('/jobs', async (req, res) => {
             const jobIApplyInfo = req.body;
             console.log('Job Application', jobIApplyInfo);

@@ -1,16 +1,39 @@
 import React from "react";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const AddJob = () => {
   const { user } = useAuth();
 
   const handleAddJob = (e) => {
     e.preventDefault();
+      const form = e.target;
     const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData);
     const { min, max, currency, ...newJob } = initialData;
-    newJob.salaryRange={min,max,currency};
+    newJob.salaryRange = { min, max, currency };
+    newJob.requirements = newJob.requirements.split("\n");
+    newJob.responsibilities = newJob.responsibilities.split("\n");
     console.log(newJob);
+    fetch(`http://localhost:5000/addJobs`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newJob),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Job Are Added",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        form.reset();
+        // navigate("/myJobApplication");
+      });
   };
 
   return (
@@ -73,7 +96,7 @@ const AddJob = () => {
             <div className="form-control">
               <label className="label font-medium">Min Salary</label>
               <input
-                type="text"
+                type="number"
                 name="min"
                 className="input input-bordered w-full"
                 required
@@ -82,7 +105,7 @@ const AddJob = () => {
             <div className="form-control">
               <label className="label font-medium">Max Salary</label>
               <input
-                type="text"
+                type="number"
                 name="max"
                 className="input input-bordered w-full"
                 required
