@@ -32,6 +32,9 @@ const Navbar = () => {
           </ul>
         </details>
       </li> */}
+         <li>
+        <Link to="/addJob"><button>Add A New Job</button></Link>
+      </li>
       <li>
         <Link to="/myJobApplication"><button>My Job Applications</button></Link>
       </li>
