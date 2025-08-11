@@ -30,7 +30,12 @@ async function run() {
         const jobApplicationCollection = client.db("jobPortal").collection('job_application');
         app.get('/jobs', async (req, res) => {
             try {
-                const jobs = await jobCollection.find().toArray();
+                const email=req.query.email;
+                const query={}
+                if(email){
+                    query ={hr_email:email};
+                }
+                const jobs = await jobCollection.find(query).toArray();
                 res.send(jobs);
             } catch (err) {
                 console.error(err);
