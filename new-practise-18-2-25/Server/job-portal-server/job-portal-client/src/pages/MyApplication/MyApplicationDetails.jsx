@@ -13,7 +13,6 @@ const MyApplicationDetails = () => {
   // }, [id]);
 
   const data=useLoaderData();
-  console.log(data);
    const {
     _id,
     title,

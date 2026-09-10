@@ -31,7 +31,7 @@ async function run() {
         app.get('/jobs', async (req, res) => {
             try {
                 const email=req.query.email;
-                const query={}
+                let  query={}
                 if(email){
                     query ={hr_email:email};
                 }
@@ -50,9 +50,20 @@ async function run() {
         });
         app.post('/jobs', async (req, res) => {
             const jobIApplyInfo = req.body;
-            console.log('Job Application', jobIApplyInfo);
             const result = await jobApplicationCollection.insertOne(jobIApplyInfo);
             res.send(result);
+        })
+        app.get('/jobs/jobsApplicationView/:job_id',async(req,res) =>{
+            const job_id=req.params.job_id;
+            const query = { job_id: job_id };
+            try {
+                const result = await jobApplicationCollection.find(query).toArray();
+        
+                res.send(result);
+            } catch (err) {
+                console.error(err);
+                res.status(500).send({ error: 'Failed to fetch job applications' });
+            }
         })
         app.get('/job-application', async (req, res) => {
             const email = req.query.email;
@@ -63,7 +74,6 @@ async function run() {
                 //  res.send(result);
                 for (application of result) {
                     const id = application.job_id?.toString();
-                    console.log(id);
                     if (!id) continue;
                     const query1 = { _id: new ObjectId(id) };
                     const job = await jobCollection.findOne(query1);
@@ -89,7 +99,6 @@ async function run() {
             const query = { _id: new ObjectId(id) };
             try {
                 const result = await jobCollection.findOne(query);
-                console.log(result);
                 res.send(result);
             } catch (err) {
                 res.status(500).send({ error: 'Failed to Fetch user' });

@@ -38,6 +38,9 @@ const Navbar = () => {
       <li>
         <Link to="/myJobApplication"><button>My Job Applications</button></Link>
       </li>
+      <li>
+        <Link to="/myPostedJobs"><button>Posted Job</button></Link>
+      </li>
     </>
   );
   return (
