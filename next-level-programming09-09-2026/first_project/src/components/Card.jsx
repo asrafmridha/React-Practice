@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Card.css";
 
 function Card({ user }) {
+  console.log(user);
   const [member, setMember] = useState("");
   const { name, age } = user;
   const clickHandler = (memberName) => {

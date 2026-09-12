@@ -1,24 +1,32 @@
+import { useState } from "react";
 import "./App.css";
 import Card from "./components/Card";
 import Counter from "./components/Counter";
 import Form from "./components/Form";
 import TestComponent from "./TestComponent";
 
-const name = "Achol";
-const users = [
+function App() {
+  const [users, setUsers] = useState([
   { name: "Rahim", age: 22 },
   { name: "Karim", age: 17 },
   { name: "Sakib", age: 25 },
-  { name: "Nusrat", age: 19 },
-  { name: "Mim", age: 16 },
-  { name: "Tanvir", age: 21 },
-  { name: "Fahim", age: 18 },
-  { name: "Jannat", age: 23 },
-  { name: "Rafi", age: 15 },
-  { name: "Sumaiya", age: 20 },
-];
+]);
 
-function App() {
+const [name, setName] = useState("");
+const [age, setAge] = useState("");
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const newUser = {
+    name: name,
+    age: Number(age),
+  };
+
+  // setUsers([...users, newUser]);
+  setUsers((prev)=>[...prev,newUser])
+
+  setName("");
+  setAge("");
+};
   return (
     <>
       {/* <TestComponent name={name}></TestComponent> */}
@@ -28,9 +36,17 @@ function App() {
           <Card user={user} key={user.age}></Card>
         ))} */}
 
-        {/* <Counter></Counter> */}
-        <Form></Form>
-        
+      {/* <Counter></Counter> */}
+      <Form
+        handleSubmit={handleSubmit}
+        name={name}
+        age={age}
+        setName={setName}
+        setAge={setAge}
+      ></Form>
+      {users.map((user) => (
+        <Card user={user} key={user.age}></Card>
+      ))}
     </>
   );
 }
