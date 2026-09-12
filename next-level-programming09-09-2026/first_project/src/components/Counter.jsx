@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { use } from "react";
+import CounterChild from "./CounterChild";
+import { CounterContext } from "../providers/counter.provider";
 
 function Counter() {
-  const [counter, setCounter] = useState(0);
-
+  const {count,setCount}=use(CounterContext);
   const handleCount = (status) => {
     if (status === "increment") {
-      setCounter(counter + 1);
-    } else if (counter > 0) {
-      setCounter(counter - 1);
+      setCount(count + 1);
+    } else if (count > 0) {
+      setCount(count - 1);
     }
   };
 
@@ -15,15 +16,10 @@ function Counter() {
     <>
       <h1>This is Counter</h1>
 
-      <button onClick={() => handleCount("increment")}>
-        Increment
-      </button>
+      <button onClick={() => handleCount("increment")}>Increment</button>
+      <CounterChild></CounterChild>
 
-      <p>Counter: {counter}</p>
-
-      <button onClick={() => handleCount("decrement")}>
-        Decrement
-      </button>
+      <button onClick={() => handleCount("decrement")}>Decrement</button>
     </>
   );
 }
